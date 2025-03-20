@@ -8,12 +8,12 @@ ThisBuild / dynverTagPrefix := "scala3-v" // a custom prefix is needed to differ
 
 val commonSettings = commonSmlBuildSettings ++ ossPublishSettings ++ Seq(
   scalaVersion := scala3,
-  organization := "com.softwaremill.magnolia1_3",
+  organization := "pro.afpma",
   description := "Fast, easy and transparent typeclass derivation for Scala 3",
   updateDocs := UpdateVersionInDocs(
     sLog.value,
     organization.value,
-    version.value,
+    "1.3.16", // version.value,
     List(file("readme.md"))
   )
 )
@@ -31,24 +31,7 @@ lazy val core = (projectMatrix in file("core"))
   .settings(commonSettings)
   .settings(
     name := "magnolia",
-    mimaPreviousArtifacts := {
-      val current = version.value
-      val isRcOrMilestone = current.contains("M") || current.contains("RC")
-      if (!isRcOrMilestone) {
-        val previous = previousStableVersion.value
-        println(
-          s"[info] Not a M or RC version, using previous version for MiMa check: $previous"
-        )
-        previousStableVersion.value
-          .map(organization.value %% moduleName.value % _)
-          .toSet
-      } else {
-        println(
-          s"[info] $current is an M or RC version, no previous version to check with MiMa"
-        )
-        Set.empty
-      }
-    },
+    version := "1.3.16",
     versionScheme := Some("early-semver")
   )
   .jvmPlatform(scalaVersions = List(scala3))
