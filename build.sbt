@@ -32,7 +32,7 @@ lazy val core = (projectMatrix in file("core"))
   .settings(commonSettings)
   .settings(
     name := "magnolia",
-    version := "1.3.16",
+    version := "1.3.16-SNAPSHOT",
     versionScheme := Some("early-semver")
   )
   .jvmPlatform(scalaVersions = List(scala3))
