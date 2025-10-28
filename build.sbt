@@ -13,7 +13,7 @@ val commonSettings = commonSmlBuildSettings ++ ossPublishSettings ++ Seq(
   updateDocs := UpdateVersionInDocs(
     sLog.value,
     organization.value,
-    "1.3.16", // version.value,
+    "1.3.16-SNAPSHOT", // version.value,
     List(file("readme.md"))
   )
 )
