@@ -5,11 +5,22 @@ import com.softwaremill.Publish.{updateDocs, ossPublishSettings}
 val scala3 = "3.3.5"
 
 ThisBuild / dynverTagPrefix := "scala3-v" // a custom prefix is needed to differentiate tags between scala2 & scala3 versions
+ThisBuild / versionScheme := Some("early-semver")
+
+// Configure for NEW Central Portal (central.sonatype.com)
+ThisBuild / sonatypeCredentialHost := "central.sonatype.com"
 
 val commonSettings = commonSmlBuildSettings ++ ossPublishSettings ++ Seq(
   scalaVersion := scala3,
   organization := "pro.afpma",
   sonatypeProfileName := "pro.afpma",
+  
+  publishTo := {
+    if (isSnapshot.value)
+      Some("central-portal-snapshots" at "https://central.sonatype.com/repository/maven-snapshots/")
+    else
+      sonatypePublishToBundle.value
+  },
   description := "Fast, easy and transparent typeclass derivation for Scala 3",
   updateDocs := UpdateVersionInDocs(
     sLog.value,
@@ -32,8 +43,7 @@ lazy val core = (projectMatrix in file("core"))
   .settings(commonSettings)
   .settings(
     name := "magnolia",
-    version := "1.3.16-SNAPSHOT",
-    versionScheme := Some("early-semver")
+    version := "1.3.16-SNAPSHOT"
   )
   .jvmPlatform(scalaVersions = List(scala3))
   .jsPlatform(scalaVersions = List(scala3))
