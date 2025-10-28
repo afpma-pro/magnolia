@@ -14,20 +14,22 @@ val commonSettings = commonSmlBuildSettings ++ ossPublishSettings ++ Seq(
   scalaVersion := scala3,
   organization := "pro.afpma",
   sonatypeProfileName := "pro.afpma",
-  
-  publishTo := {
-    if (isSnapshot.value)
-      Some("central-portal-snapshots" at "https://central.sonatype.com/repository/maven-snapshots/")
-    else
-      sonatypePublishToBundle.value
-  },
   description := "Fast, easy and transparent typeclass derivation for Scala 3",
   updateDocs := UpdateVersionInDocs(
     sLog.value,
     organization.value,
     "1.3.16", // version.value,
     List(file("readme.md"))
-  )
+  ),
+  
+  // Override plugin settings for Central Portal - MUST come AFTER ossPublishSettings
+  sonatypeCredentialHost := "central.sonatype.com",
+  publishTo := {
+    if (isSnapshot.value)
+      Some("central-portal-snapshots" at "https://central.sonatype.com/repository/maven-snapshots/")
+    else
+      sonatypePublishToBundle.value
+  }
 )
 
 lazy val root =
