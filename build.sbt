@@ -9,6 +9,7 @@ ThisBuild / dynverTagPrefix := "scala3-v" // a custom prefix is needed to differ
 val commonSettings = commonSmlBuildSettings ++ ossPublishSettings ++ Seq(
   scalaVersion := scala3,
   organization := "pro.afpma",
+  sonatypeProfileName := "pro.afpma",
   description := "Fast, easy and transparent typeclass derivation for Scala 3",
   updateDocs := UpdateVersionInDocs(
     sLog.value,
