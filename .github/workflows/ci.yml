@@ -99,7 +99,7 @@ jobs:
           echo "VERSION=$version" >> $GITHUB_ENV
 
       - name: Create GitHub Release
-        uses: softwaremill/release-drafter@v5
+        uses: release-drafter/release-drafter@v6
         with:
           config-name: release-drafter.yml
           publish: true
