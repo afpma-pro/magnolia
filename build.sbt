@@ -25,7 +25,7 @@ val commonSettings = commonSmlBuildSettings ++ ossPublishSettings ++ Seq(
   updateDocs := UpdateVersionInDocs(
     sLog.value,
     organization.value,
-    "1.3.16-SNAPSHOT", // version.value,
+    "1.3.16", // version.value,
     List(file("readme.md"))
   )
 )
@@ -43,7 +43,7 @@ lazy val core = (projectMatrix in file("core"))
   .settings(commonSettings)
   .settings(
     name := "magnolia",
-    version := "1.3.16-SNAPSHOT"
+    version := "1.3.16"
   )
   .jvmPlatform(scalaVersions = List(scala3))
   .jsPlatform(scalaVersions = List(scala3))
